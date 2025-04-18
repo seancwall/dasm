@@ -19,6 +19,21 @@ ClearRAM subroutine
         bne .clearRAM
         rts
 
+ClearVRAM subroutine
+        lda #0
+        ldx #0
+        ldy #$20
+        sty PPU_ADDR
+        sta PPU_ADDR
+        ldy #$10
+
+.loop   sta PPU_DATA
+        inx
+        bne .loop
+        dey
+        bne .loop
+        rts
+
 WaitSync subroutine
         bit PPU_STATUS
         bpl WaitSync
